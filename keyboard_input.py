@@ -20,3 +20,4 @@ while x[0] != 'c':
 
 input_thread.join()
 exit()
+# test
