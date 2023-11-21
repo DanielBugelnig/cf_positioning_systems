@@ -23,7 +23,7 @@ def simple_connect():
     print("Yeah, I'm connected! :D")
     time.sleep(3)
     print("Now I will disconnect :'(")
-
+kkk
 if __name__ == '__main__':
     # Initialize the low-level drivers
     cflib.crtp.init_drivers()
