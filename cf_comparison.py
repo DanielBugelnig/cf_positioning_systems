@@ -3,6 +3,7 @@ import sys
 import time
 from threading import Event
 import threading
+import numpy as np
 
 import cflib.crtp
 from cflib.crazyflie import Crazyflie
@@ -31,74 +32,51 @@ deck_attached_event = Event()
 
 logging.basicConfig(level=logging.ERROR)
 
-position_estimate = [0, 0, 0]
+x_coordinates = np.empty(1)
+y_coordinates = np.empty(1)
+z_coordinates = np.empty(1)
+timestamp_ = np.empty(1)
 counter = 0
 
 
 def hl_motion_commander_fly_setpoints(scf):
     with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
         mc.go_to(0.8,0.8,0.5)
-        #time.sleep(2)
+        time.sleep(2)
         mc.go_to(1.4, 1.4, 0.5)
-        #time.sleep(2)
+        time.sleep(2)
         mc.go_to(1.4, 0.2, 0.5)
-        #time.sleep(2)
+        time.sleep(2)
         mc.go_to(0.2, 0.2, 0.5)
-        #time.sleep(2)
+        time.sleep(2)
         mc.go_to(0.2, 1.4, 0.5)
-        #time.sleep(2)
+        time.sleep(2)
         mc.go_to(0.8, 0.8, 0.3)
-        #time.sleep(2)
+        time.sleep(2)
         mc.go_to(0.8, 0.8, 0.1)
-        #time.sleep(2)
+        time.sleep(2)
 
-def hl_motion_commander_fly_directions(scf):
-    mc = PositionHlCommander(scf, default_height=DEFAULT_HEIGHT)
-    mc.take_off(height = 0.4)
-    #time.sleep(2)
-    mc.go_to(0,0.8,0.5)
-    #mc.up(0.3)
-    #time.sleep(2)
-    mc.forward(1)
-    #time.sleep(2)
-    mc.right(1)
-    #time.sleep(2)
-    mc.left(1)
-    #time.sleep(2)
-    mc.back(1)
-    #time.sleep(2)
-    mc.go_to(0.8,0.8,0,3)
-    time.sleep(0.8)
-    mc.land()
 
-def hl_motion_commander_fly_frame(scf):
-    mc = PositionHlCommander(scf, default_height=DEFAULT_HEIGHT)
-    mc.take_off(height=0.4)
-    mc.go_to(0.8,0.8,0.4)
-    while exit[0] != 'exit':
-
-        while mc.get_position()[0] < 1.4 and exit[0] != 'exit':
-            mc.forward(0.05)
-        while mc.get_position()[0] > 0.2 and exit[0] != 'exit':
-            mc.back(0.05)
-    mc.go_to(0.2,0.4,0.2)
-    time.sleep(2)
-    mc.land()
 
 
 
 
 
 def log_pos_callback(timestamp, data, logconf):
-    global position_estimate
-    position_estimate[0] = data['stateEstimate.x']
-    position_estimate[1] = data['stateEstimate.y']
-    position_estimate[2] = data['stateEstimate.z']
+    global x_coordinates
+    global y_coordinates
+    global z_coordinates
+    global timestamp_
+    x_coordinates.append = data['stateEstimate.x']
+    y_coordinates.append = data['stateEstimate.x']
+    z_coordinates.append = data['stateEstimate.x']
+    timestamp_ = data['timestamp']
+
     print(data)
 
 
 
-def param_deck_flow(_, value_str):
+def param_deck_bcLoco(_, value_str):
     value = int(value_str)
     print(value)
     if value:
@@ -118,7 +96,7 @@ if __name__ == '__main__':
     with SyncCrazyflie(URI, cf=Crazyflie(rw_cache='./cache')) as scf:
 
         scf.cf.param.add_update_callback(group='deck', name='bcLoco',
-                                         cb=param_deck_flow)
+                                         cb=param_deck_bcLoco)
         time.sleep(1)
 
         logconf = LogConfig(name='Position', period_in_ms=10)
@@ -133,8 +111,7 @@ if __name__ == '__main__':
             sys.exit(1)
 
         logconf.start()
-
-        hl_motion_commander_fly_directions((scf))
         input_thread.join()
-        #time.sleep(10)
+        hl_motion_commander_fly_setpoints(scf)
         logconf.stop()
+        print(x_coordinates[10:20])
