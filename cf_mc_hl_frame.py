@@ -31,27 +31,21 @@ deck_attached_event = Event()
 
 logging.basicConfig(level=logging.ERROR)
 
-position_estimate = [0, 0, 0]
 counter = 0
 
 
 def hl_motion_commander_fly_setpoints(scf):
     with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
-        mc.go_to(0.8,0.8,0.5)
+        mc.go_to(0, 0, 0.5)
         #time.sleep(2)
-        mc.go_to(1.4, 1.4, 0.5)
+        mc.go_to(2, 0, 0.5)
         #time.sleep(2)
-        mc.go_to(1.4, 0.2, 0.5)
+        mc.go_to(0, 0, 0.5)
         #time.sleep(2)
-        mc.go_to(0.2, 0.2, 0.5)
+        mc.go_to(-1, 0, 0.5)
         #time.sleep(2)
-        mc.go_to(0.2, 1.4, 0.5)
+        mc.go_to(0, 0, 0.5)
         #time.sleep(2)
-        mc.go_to(0.8, 0.8, 0.3)
-        #time.sleep(2)
-        mc.go_to(0.8, 0.8, 0.1)
-        #time.sleep(2)
-
 def hl_motion_commander_fly_directions(scf):
     mc = PositionHlCommander(scf, default_height=DEFAULT_HEIGHT)
     mc.take_off(height = 0.4)
@@ -90,11 +84,9 @@ def hl_motion_commander_fly_frame(scf):
 
 
 def log_pos_callback(timestamp, data, logconf):
-    global position_estimate
-    position_estimate[0] = data['stateEstimate.x']
-    position_estimate[1] = data['stateEstimate.y']
-    position_estimate[2] = data['stateEstimate.z']
-    print(data)
+    print('[%d][%s] %s' % (timestamp, logconf.name, data))
+
+
 
 
 
@@ -134,7 +126,9 @@ if __name__ == '__main__':
 
         logconf.start()
 
-        hl_motion_commander_fly_directions((scf))
+        hl_motion_commander_fly_setpoints((scf))
         input_thread.join()
+
+
         #time.sleep(10)
         logconf.stop()

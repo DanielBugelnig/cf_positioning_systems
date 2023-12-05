@@ -13,9 +13,9 @@ from cflib.positioning.motion_commander import MotionCommander
 from cflib.utils import uri_helper
 from cflib.positioning.position_hl_commander import PositionHlCommander
 
-def user_input_listener(x):
-    while x[0] != 'exit':
-        x[0]= input()
+#def user_input_listener(x):
+#    while x[0] != 'exit':
+#        x[0]= input()
 
 
 # Start the user input listener in a separate thread
@@ -32,29 +32,31 @@ deck_attached_event = Event()
 
 logging.basicConfig(level=logging.ERROR)
 
-x_coordinates = np.empty(1)
-y_coordinates = np.empty(1)
-z_coordinates = np.empty(1)
-timestamp_ = np.empty(1)
+x_coordinates = np.zeros(100000)
+y_coordinates = np.empty(100000)
+z_coordinates = np.empty(100000)
+timestamp_ = np.empty(100000)
 counter = 0
 
 
 def hl_motion_commander_fly_setpoints(scf):
     with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
-        mc.go_to(0.8,0.8,0.5)
-        time.sleep(2)
-        mc.go_to(1.4, 1.4, 0.5)
-        time.sleep(2)
-        mc.go_to(1.4, 0.2, 0.5)
-        time.sleep(2)
-        mc.go_to(0.2, 0.2, 0.5)
-        time.sleep(2)
-        mc.go_to(0.2, 1.4, 0.5)
-        time.sleep(2)
-        mc.go_to(0.8, 0.8, 0.3)
-        time.sleep(2)
-        mc.go_to(0.8, 0.8, 0.1)
-        time.sleep(2)
+        mc.go_to(0.0,0.0,0.5)
+        mc.go_to(1, 0, 0.5)
+        mc.go_to(-1, 0, 0.5)
+        mc.go_to(1, -1, 0.5)
+        mc.go_to(0,0,0.5)
+
+        mc.go_to(0,0,1.5)
+        mc.go_to(1.5,1,1.5)
+        mc.go_to(1.5, -0.5, 1.5)
+        mc.go_to(-1.5, -0.5, 1.5)
+        mc.go_to(-1.5, 0.5
+                 , 1.5)
+        mc.go_to(0,0, 1.5)
+
+        mc.go_to(0, 0, 0.7)
+        mc.go_to(0, 0, 0.3)
 
 
 
@@ -67,12 +69,14 @@ def log_pos_callback(timestamp, data, logconf):
     global y_coordinates
     global z_coordinates
     global timestamp_
-    x_coordinates.append = data['stateEstimate.x']
-    y_coordinates.append = data['stateEstimate.x']
-    z_coordinates.append = data['stateEstimate.x']
-    timestamp_ = data['timestamp']
+    global counter
+    x_coordinates[counter] = data['stateEstimate.x']
+    y_coordinates[counter] = data['stateEstimate.y']
+    z_coordinates[counter] = data['stateEstimate.z']
+    timestamp_[counter] = timestamp
 
     print(data)
+    counter = counter + 1
 
 
 
@@ -88,9 +92,9 @@ def param_deck_bcLoco(_, value_str):
 if __name__ == '__main__':
     cflib.crtp.init_drivers()
 
-    exit = [2]
-    input_thread = threading.Thread(target=user_input_listener, args=(exit,))
-    input_thread.start()
+   # exit = [2]
+    #input_thread = threading.Thread(target=user_input_listener, args=(exit,))
+    #input_thread.start()
 
 
     with SyncCrazyflie(URI, cf=Crazyflie(rw_cache='./cache')) as scf:
@@ -99,7 +103,7 @@ if __name__ == '__main__':
                                          cb=param_deck_bcLoco)
         time.sleep(1)
 
-        logconf = LogConfig(name='Position', period_in_ms=10)
+        logconf = LogConfig(name='Position', period_in_ms=16.66666)
         logconf.add_variable('stateEstimate.x', 'float')
         logconf.add_variable('stateEstimate.y', 'float')
         logconf.add_variable('stateEstimate.z', 'float')
@@ -111,7 +115,8 @@ if __name__ == '__main__':
             sys.exit(1)
 
         logconf.start()
-        input_thread.join()
+        #input_thread.join()
         hl_motion_commander_fly_setpoints(scf)
         logconf.stop()
         print(x_coordinates[10:20])
+        print(timestamp_[10:20])
