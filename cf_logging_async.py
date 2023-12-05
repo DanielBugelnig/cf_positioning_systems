@@ -35,6 +35,7 @@ def simple_log_async(scf, logconf):
     logconf.start()
     time.sleep(1)
     #logconf.stop()
+    #test
 
 def log_callback(timestamp, data, logconf):
     print('[%d][%s] %s' % (timestamp, logconf.name, data))
