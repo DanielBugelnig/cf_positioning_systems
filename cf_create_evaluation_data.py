@@ -19,7 +19,7 @@ URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E7E7')
 
 DEFAULT_HEIGHT = 0.5
 deck_attached_event = Event()
-logging_rate = 16.6666 #in ms
+logging_rate = 10 #in ms
 
 logging.basicConfig(level=logging.ERROR)
 
