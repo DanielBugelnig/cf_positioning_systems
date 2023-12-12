@@ -28,6 +28,11 @@ This project uses several parts of hardware and software; setups for specific pa
 ** anchor configurator
 ** motive
 ** matlab
+<ul>
+<li><p>Eintrag 1</p></li>
+<li><p>Eintrag 2</p></li>
+<li><p>Eintrag 3</p></li>
+</ul>
 
 
 https://www.bitcraze.io/documentation/tutorials/getting-started-with-loco-positioning-system/
