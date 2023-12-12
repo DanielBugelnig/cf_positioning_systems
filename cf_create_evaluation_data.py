@@ -4,6 +4,7 @@ import time
 from threading import Event
 import threading
 import numpy as np
+from datetime import date
 
 import cflib.crtp
 from cflib.crazyflie import Crazyflie
@@ -13,29 +14,19 @@ from cflib.positioning.motion_commander import MotionCommander
 from cflib.utils import uri_helper
 from cflib.positioning.position_hl_commander import PositionHlCommander
 
-#def user_input_listener(x):
-#    while x[0] != 'exit':
-#        x[0]= input()
-
-
-# Start the user input listener in a separate thread
-
-
 
 URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E7E7')
 
 DEFAULT_HEIGHT = 0.5
-BOX_LIMIT1 = 1.35
-BOX_LIMIT2 = 0.15
-
 deck_attached_event = Event()
+logging_rate = 16.6666 #in ms
 
 logging.basicConfig(level=logging.ERROR)
 
-x_coordinates = np.zeros(100000)
-y_coordinates = np.empty(100000)
-z_coordinates = np.empty(100000)
-timestamp_ = np.empty(100000)
+x_coordinates = np.zeros(10000)
+y_coordinates = np.empty(10000)
+z_coordinates = np.empty(10000)
+timestamp_ = np.empty(10000)
 counter = 0
 
 
@@ -58,10 +49,12 @@ def hl_motion_commander_fly_setpoints(scf):
         mc.go_to(0, 0, 0.7)
         mc.go_to(0, 0, 0.3)
 
-
-
-
-
+def hl_mc_fly_line(scf,z):
+    with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
+        mc.go_to(0,0,z)
+        mc.go_to(-1,-1,z)
+        mc.go_to(1,1,z)
+        mc.go_to(1,1,0.2)
 
 
 def log_pos_callback(timestamp, data, logconf):
@@ -78,9 +71,7 @@ def log_pos_callback(timestamp, data, logconf):
     print(data)
     counter = counter + 1
 
-
-
-def param_deck_bcLoco(_, value_str):
+def param_deck_bcloco(_, value_str):
     value = int(value_str)
     print(value)
     if value:
@@ -92,18 +83,13 @@ def param_deck_bcLoco(_, value_str):
 if __name__ == '__main__':
     cflib.crtp.init_drivers()
 
-   # exit = [2]
-    #input_thread = threading.Thread(target=user_input_listener, args=(exit,))
-    #input_thread.start()
-
-
     with SyncCrazyflie(URI, cf=Crazyflie(rw_cache='./cache')) as scf:
 
         scf.cf.param.add_update_callback(group='deck', name='bcLoco',
-                                         cb=param_deck_bcLoco)
+                                         cb=param_deck_bcloco)
         time.sleep(1)
 
-        logconf = LogConfig(name='Position', period_in_ms=16.66666)
+        logconf = LogConfig(name='Position', period_in_ms=logging_rate)
         logconf.add_variable('stateEstimate.x', 'float')
         logconf.add_variable('stateEstimate.y', 'float')
         logconf.add_variable('stateEstimate.z', 'float')
@@ -113,10 +99,23 @@ if __name__ == '__main__':
         if not deck_attached_event.wait(timeout=5):
             print('No flow deck detected!')
             sys.exit(1)
-
+        height = 1
         logconf.start()
-        #input_thread.join()
-        hl_motion_commander_fly_setpoints(scf)
+#       hl_motion_commander_fly_setpoints(scf)
+        hl_mc_fly_line(scf, height)
         logconf.stop()
         print(x_coordinates[10:20])
         print(timestamp_[10:20])
+#       Öffne die Datei zum Schreiben ('w' steht für write, 'a' steht für append)
+        with open('x_coordinates.txt', 'w') as file:
+            # Schreibe Text in die Datei
+            print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter")
+            print("Date: ", date.today())
+            print("logging-rate: " + str(logging_rate))
+            print(timestamp_[0])
+            for i in range(len(x_coordinates)):
+                if x_coordinates[i] == 0:
+                    timestamp_end = timestamp_[i]
+                print(x_coordinates[i], file=file)
+            print(timestamp_end)
+
