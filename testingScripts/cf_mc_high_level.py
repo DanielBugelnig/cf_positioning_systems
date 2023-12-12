@@ -38,7 +38,7 @@ def hl_motion_commander_fly_setpoints(scf):
     with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
         mc.go_to(0, 0, 0.5)
         #time.sleep(2)
-        mc.go_to(2, 0, 0.5)
+        mc.go_to(1, 0, 0.5)
         #time.sleep(2)
         mc.go_to(0, 0, 0.5)
         #time.sleep(2)

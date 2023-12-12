@@ -54,7 +54,10 @@ def hl_mc_fly_line(scf,z):
         mc.go_to(0,0,z)
         mc.go_to(-1,-1,z)
         mc.go_to(1,1,z)
-        mc.go_to(1,1,0.2)
+        mc.go_to(0,0,z)
+        mc.go_to(0, 0, 0.2)
+
+
 
 
 def log_pos_callback(timestamp, data, logconf):
@@ -104,18 +107,39 @@ if __name__ == '__main__':
 #       hl_motion_commander_fly_setpoints(scf)
         hl_mc_fly_line(scf, height)
         logconf.stop()
-        print(x_coordinates[10:20])
-        print(timestamp_[10:20])
 #       Öffne die Datei zum Schreiben ('w' steht für write, 'a' steht für append)
         with open('x_coordinates.txt', 'w') as file:
             # Schreibe Text in die Datei
-            print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter")
-            print("Date: ", date.today())
-            print("logging-rate: " + str(logging_rate))
-            print(timestamp_[0])
+            print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter",file=file)
+            print("Date: ", date.today(),file=file)
+            print("logging-rate: " + str(logging_rate),file=file)
             for i in range(len(x_coordinates)):
-                if x_coordinates[i] == 0:
-                    timestamp_end = timestamp_[i]
-                print(x_coordinates[i], file=file)
-            print(timestamp_end)
+                if x_coordinates[i] != 0.0:
+                    print(x_coordinates[i], file=file)
 
+                else:
+                    break
+
+        with open('y_coordinates.txt', 'w') as file:
+                    # Schreibe Text in die Datei
+                    print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter", file=file)
+                    print("Date: ", date.today(), file=file)
+                    print("logging-rate: " + str(logging_rate), file=file)
+                    for i in range(len(y_coordinates)):
+                        if y_coordinates[i] != 0.0:
+                            print(y_coordinates[i], file=file)
+
+                        else:
+                            break
+
+        with open('z_coordinates.txt', 'w') as file:
+            # Schreibe Text in die Datei
+            print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter", file=file)
+            print("Date: ", date.today(), file=file)
+            print("logging-rate: " + str(logging_rate), file=file)
+            for i in range(len(z_coordinates)):
+                if z_coordinates[i] != 0.0:
+                    print(z_coordinates[i], file=file)
+
+                else:
+                    break
