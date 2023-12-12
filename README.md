@@ -17,32 +17,18 @@ Furthermore, the preciseness and accuracy will be compared with the optitrack mo
 This project uses several parts of hardware and software; setups for specific parts are listed below.
 ### Hardware 
 * #### Crazyflie
-** loco_positioning_deck
-** marker_deck with one passive marker
-** crazy_radio antenna
+   * loco_positioning_deck
+   * marker_deck with one passive marker
+   * crazy_radio antenna
 * #### positioning hardware
-** Optitrack, a total of seven infrared cameras
-** Loco Positioning, a total of 8 anchors
+   * Optitrack, a total of seven infrared cameras
+   * Loco Positioning, a total of 8 anchors
 * > ### Software
-** cfc client
-** anchor configurator
-** motive
-** matlab
-<ul>
-<li><p>Eintrag 1</p></li>
-<li><p>Eintrag 2</p></li>
-<li><p>Eintrag 3</p></li>
-</ul>
-1. Erster Hauptpunkt
-   - Unterpunkt 1
-   - Unterpunkt 2
-     - Unterpunkt 2.1
-     - Unterpunkt 2.2
-   - Unterpunkt 3
+   * cfc client
+   * anchor configurator
+   * motive
+   * matlab
 
-2. Zweiter Hauptpunkt
-   - Unterpunkt A
-   - Unterpunkt B
 
 
 
