@@ -33,6 +33,17 @@ This project uses several parts of hardware and software; setups for specific pa
 <li><p>Eintrag 2</p></li>
 <li><p>Eintrag 3</p></li>
 </ul>
+1. Erster Hauptpunkt
+   - Unterpunkt 1
+   - Unterpunkt 2
+     - Unterpunkt 2.1
+     - Unterpunkt 2.2
+   - Unterpunkt 3
+
+2. Zweiter Hauptpunkt
+   - Unterpunkt A
+   - Unterpunkt B
+
 
 
 https://www.bitcraze.io/documentation/tutorials/getting-started-with-loco-positioning-system/
