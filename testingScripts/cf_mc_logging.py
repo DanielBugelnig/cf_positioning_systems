@@ -39,7 +39,7 @@ def move_linear_simple(scf):
         time.sleep(1)
         print(position_estimate)
 
-def move_linear_simplehl(scf):
+def move_linear_simple2(scf):
     with MotionCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
         time.sleep(1)
         mc.start_forward(0.5)
@@ -68,30 +68,6 @@ def move_box_limit(scf):
                 mc.start_up(0.05)
             elif pos[2] > 0.5:
                 mc.start_down(0.05)
-
-
-
-def move_box_limit2(scf):
-    with MotionCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
-        body_x_cmd = 0.2
-        body_y_cmd = 0.1
-        max_vel = 0.2
-
-        while (1):
-
-            if position_estimate[0] > 1.5:
-                body_x_cmd = -max_vel
-            elif position_estimate[0] < 0:
-                body_x_cmd = max_vel
-            if position_estimate[1] > 1.5:
-                body_y_cmd = -max_vel
-            elif position_estimate[1] < 0:
-                body_y_cmd = max_vel
-
-            mc.start_linear_motion(body_x_cmd, body_y_cmd, 0)
-
-            time.sleep(0.1)
-
 
 def hl_motion_commander_fly_setpoints(scf):
     with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
@@ -185,7 +161,7 @@ if __name__ == '__main__':
 
         logconf.start()
         #move_linear_simple(scf)
-        #move_linear_simplehl(scf)
+        #move_linear_simple2(scf)
         #move_box_limit(scf)
         #hl_motion_commander_fly_directions((scf))
         hl_motion_commander_fly_frame(scf)
