@@ -3,6 +3,10 @@
 
 This project aims to set up and use Crazyflie with the loco positioning system to enable autonomous flight.
 Furthermore, the preciseness and accuracy will be compared with the optitrack motion-capturing positioning system.
+The Loco Positioning System uses UWB (ultra-wide-band). Anchors in the room continously connect with the crazyflie and calculate the distance between them. 
+8 anchors were used in this setup, it is also possible with four.
+The Optitrack system uses infrared cameras, witch tracks a passive marker. The infrared ligth will reflect off the passive marker, mounted on the crazyflie, and the distance between camera and marker will be calculated.
+7 cameras were used in this setup.
 
 # Description of folders and files:
 > #### / testing_scripts
@@ -25,21 +29,38 @@ This project uses several parts of hardware and software; setups for specific pa
    * Optitrack, a total of seven infrared cameras
    * Loco Positioning, a total of 8 anchors
 * #### Software
-   * cfc client
-   * anchor configurator
-   * motive
-   * matlab
-   * python
+   * cfc client (crazyflie)
+   * LPS configuration tool (loco)
+   * motive (optitrack)
+   * matlab (evaluation)
+   * python (execution)
 
-
-
-## Set up crazyflie and loco positioning system
-Follow the docuemntation on bitcraze.io to set up the crazyflie and the loco positioning system
+Follow the documentation on bitcraze.io to set up the crazyflie and the loco positioning system
 ### Crazyfly Setup
 https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/
-### Loco Setup
+Mount the loco_positioning deck to the bottom side of the crazyflie, on top place the marker_deck with one passive marker.
+### Positioning Systems
+For building up the flying environment, it is recommended to calibrate the two positioning systems to the same coordination system. Otherwise, an offset has to be calculated and has to take into account.
+#### Optitrack
+Set up the optitrack environment(https://docs.optitrack.com/quick-start-guides/quick-start-guide-getting-started) For this setup 7 cameras where used, which were mounted on a frame on the top of the room.
+Calibration file for used setup --> 'calibration/stored in setup files'
+
+#### Loco Setup
+To align the Loco System with Optitrack, use passive markers on the loco-anchors to get the exact position of the anchors. 
+For the used environment, position data of the anchors can be found here.
+Follow the instructions of the documentation on bitcraze.io.
 https://www.bitcraze.io/documentation/tutorials/getting-started-with-loco-positioning-system/
 - Used Mode: TWR
+- To assign an ID (LPS configuration tool) to the anchors, it is recommended to use a VM, which is provided by bitcraze
+- Position data for anchors, aligned with Optitrack --> 'anchor file/stored in setup files'
+- 
+If all steps are finished, make some manual test to make sure everything is set up correct.
+Connect the crazyflie with the cfc client and test out some positions with the crazyflie manually to test the loco system.
+Use the opitrack system to make sure the positioning data is similar.
+
+# Connect with Crazyflie by python
+Several python libraries have to be installed
+- 
 
 
 
