@@ -1,5 +1,6 @@
 #############################################################################
 # this is a simple script, which connects to the Crazyfly
+# if the connection is successfull, it will displayed in the terminal and some led on the crazyflie will light up
 ############################################################################
 #standard packages
 import logging
