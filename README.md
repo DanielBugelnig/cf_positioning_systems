@@ -60,7 +60,11 @@ Use the opitrack system to make sure the positioning data is similar.
 
 # Connect with Crazyflie by python
 Several python libraries have to be installed
-- 
+- numPy
+- cflib
+
+Remember to plug in the crazy_radio antenna.
+Test out the connection with some test scripts under /testingScripts
 
 
 
