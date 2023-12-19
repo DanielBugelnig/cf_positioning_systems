@@ -64,7 +64,27 @@ Several python libraries have to be installed
 - cflib
 
 Remember to plug in the crazy_radio antenna.
-Test out the connection with some test scripts under /testingScripts
+Test out the connection with test scripts (/testingScripts)
+In this order: 
+- connecting.py
+- cf_logging_sync
+- cf_logging_async
+- cf_motion_commander
+- cf_mc_high_level
+
+If errors occur, this documentation may help:
+https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/master/
+
+# Create data
+For comparison, several measures will be done.
+Simple Position Comparison without flying
+Flying multiple trajectories with different heights
+cf_create evaluation_data fly the crazyflie from A to B, uses different heights as input.
+The loco positioning data will be saved under xyz_coordinates.
+To get the positioning data from the optitrack system, start recording before flying and export the position data as .csv file.
+
+# Evaluation
+For evaluation, Matlab is used, simply input the correct datapaths of the data and the positioning data will be synchronzied and evaluated automatically.
 
 
 
