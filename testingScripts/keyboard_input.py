@@ -1,3 +1,6 @@
+#################################
+# this small script tests threading
+#################################
 import threading
 import time
 
