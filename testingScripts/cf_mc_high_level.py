@@ -1,3 +1,7 @@
+#############################################################################
+# this is a script, which connects to the Crazyfly and uses asnynchronous logging and the high_level motion commander class
+# to fly autonomously with the loco positioning system. It tests out some functions of the class
+############################################################################
 import logging
 import sys
 import time
