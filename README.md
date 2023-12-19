@@ -29,11 +29,17 @@ This project uses several parts of hardware and software; setups for specific pa
    * anchor configurator
    * motive
    * matlab
+   * python
 
 
 
-
+## Set up crazyflie and loco positioning system
+Follow the docuemntation on bitcraze.io to set up the crazyflie and the loco positioning system
+### Crazyfly Setup
+https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/
+### Loco Setup
 https://www.bitcraze.io/documentation/tutorials/getting-started-with-loco-positioning-system/
+- Used Mode: TWR
 
 
 
