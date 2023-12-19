@@ -37,5 +37,5 @@ https://www.bitcraze.io/documentation/tutorials/getting-started-with-loco-positi
 
 
 
-#files for testing out several functions and features of the crazyflie
+
 
