@@ -1,5 +1,6 @@
 #############################################################################
 # this is a simple script, which connects to the Crazyfly and uses asynchronous logging
+# and uses the motion commander class
 ############################################################################
 #standard packages
 
