@@ -53,11 +53,11 @@ def hl_mc_fly_line(scf,z):
     with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
         mc.go_to(0,0,z)
         time.sleep(2)
-        mc.go_to(-1,-1,z)
-        mc.go_to(1,-1,z)
-        mc.go_to(1,1,z)
-        mc.go_to(-1,1,z)
-        mc.go_to(-1, -1, z)
+        mc.go_to(-0.5,-0.5,z)
+        mc.go_to(0.5,-0.5,z)
+        mc.go_to(0.5,0.5,z)
+        mc.go_to(-0.5,0.5,z)
+        mc.go_to(-0.5, -0.5, z)
         mc.go_to(0,0,z)
         mc.go_to(0,0,0.2)
 
@@ -106,13 +106,13 @@ if __name__ == '__main__':
         if not deck_attached_event.wait(timeout=5):
             print('No flow deck detected!')
             sys.exit(1)
-        height = 2
+        height = 1.5
         logconf.start()
 #       hl_motion_commander_fly_setpoints(scf)
         hl_mc_fly_line(scf, height)
         logconf.stop()
 #       Öffne die Datei zum Schreiben
-        with open('xyz_coordinates_loco_h2.txt', 'w') as file:
+        with open('xyz_coordinates_loco_h15.txt', 'w') as file:
             # Schreibe Text in die Datei
             print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter",file=file)
             print("Date: ", date.today(),file=file)
