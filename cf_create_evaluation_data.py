@@ -115,7 +115,7 @@ if __name__ == '__main__':
             print("logging-rate: " + str(logging_rate),file=file)
             for i in range(len(x_coordinates)):
                 if x_coordinates[i] != 0.0:
-                    print(x_coordinates[i], file=file)
+                    print(x_coordinates[i], y_coordinates[i], z_coordinates[i], file=file)
 
                 else:
                     break
