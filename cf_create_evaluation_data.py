@@ -107,8 +107,8 @@ if __name__ == '__main__':
 #       hl_motion_commander_fly_setpoints(scf)
         hl_mc_fly_line(scf, height)
         logconf.stop()
-#       Öffne die Datei zum Schreiben ('w' steht für write, 'a' steht für append)
-        with open('x_coordinates.txt', 'w') as file:
+#       Öffne die Datei zum Schreiben
+        with open('xyz_coordinates_loco.txt', 'w') as file:
             # Schreibe Text in die Datei
             print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter",file=file)
             print("Date: ", date.today(),file=file)
@@ -120,26 +120,3 @@ if __name__ == '__main__':
                 else:
                     break
 
-        with open('y_coordinates.txt', 'w') as file:
-                    # Schreibe Text in die Datei
-                    print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter", file=file)
-                    print("Date: ", date.today(), file=file)
-                    print("logging-rate: " + str(logging_rate), file=file)
-                    for i in range(len(y_coordinates)):
-                        if y_coordinates[i] != 0.0:
-                            print(y_coordinates[i], file=file)
-
-                        else:
-                            break
-
-        with open('z_coordinates.txt', 'w') as file:
-            # Schreibe Text in die Datei
-            print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter", file=file)
-            print("Date: ", date.today(), file=file)
-            print("logging-rate: " + str(logging_rate), file=file)
-            for i in range(len(z_coordinates)):
-                if z_coordinates[i] != 0.0:
-                    print(z_coordinates[i], file=file)
-
-                else:
-                    break
