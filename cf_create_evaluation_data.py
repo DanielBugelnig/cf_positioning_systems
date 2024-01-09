@@ -106,7 +106,7 @@ if __name__ == '__main__':
         if not deck_attached_event.wait(timeout=5):
             print('No flow deck detected!')
             sys.exit(1)
-        height = 1.5
+        height = 0.75
         logconf.start()
 #       hl_motion_commander_fly_setpoints(scf)
         hl_mc_fly_line(scf, height)
