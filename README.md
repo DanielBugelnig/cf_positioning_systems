@@ -36,7 +36,7 @@ This project uses several parts of hardware and software; setups for specific pa
    * python (execution)
 
 Follow the documentation on bitcraze.io to set up the crazyflie and the loco positioning system
-### Crazyfly Setup
+### Crazyflie Setup
 https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/
 Mount the loco_positioning deck to the bottom side of the crazyflie, on top, place the marker_deck with one passive marker.
 ### Positioning Systems
