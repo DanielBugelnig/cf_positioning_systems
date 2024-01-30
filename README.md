@@ -43,7 +43,7 @@ Mount the loco_positioning deck to the bottom side of the crazyflie, on top plac
 For building up the flying environment, it is recommended to calibrate the two positioning systems to the same coordination system. Otherwise, an offset has to be calculated and has to take into account.
 #### Optitrack
 Set up the optitrack environment(https://docs.optitrack.com/quick-start-guides/quick-start-guide-getting-started) For this setup 7 cameras where used, which were mounted on a frame on the top of the room.
-Calibration [file](setup_files/Calibration Excellent (MeanErr 0.626 mm) 2023-05-31 9.cal) for used setup 
+Calibration [file](setup_files/) for used setup
 
 #### Loco Setup
 To align the Loco System with Optitrack, use passive markers on the loco-anchors to get the exact position of the anchors. 
