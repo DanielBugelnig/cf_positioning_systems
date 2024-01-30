@@ -90,9 +90,9 @@ Loco Positioning Data is automatically stored in the project folder, specify the
 
 
 # Evaluation
-For evaluation, Matlab is used, simply input the correct datapaths of the data, and the positioning data will be synchronized and evaluated automatically.
+For [evaluation](data_processing/data_comparison_12_12_2023.m), Matlab is used, simply input the correct datapaths of the data, and the positioning data will be synchronized and evaluated automatically.
 Eventually, cut off header information of the data.
-Make sure, that the data files are complete
+Make sure, that the data files are complete.
 
 
 
