@@ -12,7 +12,7 @@ The Optitrack system uses infrared cameras, which tracks a passive marker. The i
 > #### / testing_scripts
 >Scripts for testing several functions of the crazyflie
 >> #### / setup_files
-> #### / evaluation_scripts
+> #### / data_processing
 >> Scripts that produce data for evaluation and plotting
 > #### / results_plots
 >> Evaluated data and plotted results
