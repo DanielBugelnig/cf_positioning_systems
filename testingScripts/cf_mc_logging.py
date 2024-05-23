@@ -12,7 +12,7 @@ from cflib.utils import uri_helper
 from cflib.positioning.position_hl_commander import PositionHlCommander
 
 
-URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E7E7')
+URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E701')
 
 DEFAULT_HEIGHT = 0.5
 BOX_LIMIT1 = 1.35

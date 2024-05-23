@@ -15,7 +15,7 @@ from cflib.utils import uri_helper
 from cflib.positioning.position_hl_commander import PositionHlCommander
 
 
-URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E7E7')
+URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E701')
 
 DEFAULT_HEIGHT = 0.5
 deck_attached_event = Event()
@@ -61,6 +61,23 @@ def hl_mc_fly_line(scf,z):
         mc.go_to(0,0,z)
         mc.go_to(0,0,0.2)
 
+def hl_mc_fly_area(scf, z):
+    with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
+        mc.go_to(0, 0, z)
+        #time.sleep(2)
+        for i in range(1):
+            for j in range(0,6,2):
+                mc.go_to(-2, -1 + j*0.3,z+i*0.2)
+                mc.go_to(1.2,-1 + j*0.3, z+i*0.2)
+                mc.go_to(1.2,-1 + (j+1)*0.3,z+i*0.2)
+                mc.go_to(-2, -1 + (j+1) * 0.3,z+i*0.2)
+
+        mc.go_to(0, 0, 1)
+        #time.sleep(2)
+        mc.go_to(0, 0, 0.2)
+
+
+
 
 
 
@@ -100,19 +117,23 @@ if __name__ == '__main__':
         logconf.add_variable('stateEstimate.x', 'float')
         logconf.add_variable('stateEstimate.y', 'float')
         logconf.add_variable('stateEstimate.z', 'float')
+        logconf.add_variable('pm.vbat', 'float')
         scf.cf.log.add_config(logconf)
         logconf.data_received_cb.add_callback(log_pos_callback)
 
         if not deck_attached_event.wait(timeout=5):
             print('No flow deck detected!')
             sys.exit(1)
-        height = 0.75
+        height = 1
         logconf.start()
 #       hl_motion_commander_fly_setpoints(scf)
-        hl_mc_fly_line(scf, height)
+        hl_mc_fly_area(scf,1)
+        #hl_mc_fly_line(scf, height)
+        #time.sleep(2)
+
         logconf.stop()
 #       Öffne die Datei zum Schreiben
-        with open('xyz_coordinates_loco_h15.txt', 'w') as file:
+        with open('xyz_coordinates_loco_h1_250424.txt', 'w') as file:
             # Schreibe Text in die Datei
             print("Test Fly: hl_mc_fly_line, height at " + str(height) + "meter",file=file)
             print("Date: ", date.today(),file=file)

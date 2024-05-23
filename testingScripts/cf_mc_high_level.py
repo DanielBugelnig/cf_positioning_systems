@@ -25,7 +25,7 @@ def user_input_listener(x):
 
 
 
-URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E7E7')
+URI = uri_helper.uri_from_env(default='radio://0/80/2M/E7E7E7E701')
 
 DEFAULT_HEIGHT = 0.5
 BOX_LIMIT1 = 1.35
@@ -54,17 +54,17 @@ def hl_motion_commander_fly_directions(scf):
     mc = PositionHlCommander(scf, default_height=DEFAULT_HEIGHT)
     mc.take_off(height = 0.4)
     #time.sleep(2)
-    mc.go_to(0,0.8,0.5)
+    mc.go_to(0,0,0.5)
     #mc.up(0.3)
     #time.sleep(2)
     mc.forward(1)
-    #time.sleep(2)
+    time.sleep(2)
     mc.right(1)
-    #time.sleep(2)
+    time.sleep(2)
     mc.left(1)
-    #time.sleep(2)
+    time.sleep(2)
     mc.back(1)
-    #time.sleep(2)
+    time.sleep(2)
     mc.go_to(0.8,0.8,0,3)
     time.sleep(0.8)
     mc.land()
@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
         logconf.start()
 
-        hl_motion_commander_fly_setpoints((scf))
+        hl_motion_commander_fly_directions(scf)
         input_thread.join()
 
 
