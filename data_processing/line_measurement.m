@@ -10,9 +10,9 @@ clf;
 close all;
 
 % Position Data read in
-% Dataset 02.05.2024
-file_path_xyz_optitrack_1 = 'line_measurement\xyz_coordinates_optitrack_02052024.csv';
-file_path_xyz_loco_1 = 'line_measurement\xyz_coordinates_loco_02052024.csv';
+% Dataset 02.05.2024, make sure the file path is correct
+file_path_xyz_optitrack_1 = 'line_measurement_8a_020524_op.csv';
+file_path_xyz_loco_1 = 'line_measurement_8a_020524_lo.csv';
 
 
 %Extract Data of 1m flight
