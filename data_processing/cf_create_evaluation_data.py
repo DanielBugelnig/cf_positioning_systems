@@ -49,7 +49,7 @@ def hl_motion_commander_fly_setpoints(scf):
         mc.go_to(0, 0, 0.7)
         mc.go_to(0, 0, 0.3)
 
-def hl_mc_fly_line(scf,z):
+def hl_mc_fly_square(scf,z):
     with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
         mc.go_to(0,0,z)
         time.sleep(2)
@@ -61,7 +61,7 @@ def hl_mc_fly_line(scf,z):
         mc.go_to(0,0,z)
         mc.go_to(0,0,0.2)
 
-def hl_mc_fly_area(scf, z):
+def hl_mc_fly_line(scf, z):
     with PositionHlCommander(scf, default_height=DEFAULT_HEIGHT) as mc:
         mc.go_to(0, 0, z)
         #time.sleep(2)
@@ -127,7 +127,7 @@ if __name__ == '__main__':
         height = 1
         logconf.start()
 #       hl_motion_commander_fly_setpoints(scf)
-        hl_mc_fly_area(scf,1)
+        hl_mc_fly_square(scf,height)
         #hl_mc_fly_line(scf, height)
         #time.sleep(2)
 
