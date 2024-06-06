@@ -2,19 +2,33 @@
 % Optitrack for autonomous flight
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+clear all; close all; clc;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Import Datasets
-clear all;
-clf;
 
 % Position Data read in
-file_path_xyz_loco_075 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Take_09012024_square\square_h_075\take_square_h075_lo.csv";
-file_path_xyz_optitrack_075 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Take_09012024_square\square_h_075\take_square_h075_op.csv";
-file_path_xyz_loco_1 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Take_09012024_square\square_h_1\take_square_h1_lo.csv";
-file_path_xyz_optitrack_1 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Take_09012024_square\square_h_1\take_square_h1_op.csv";
-file_path_xyz_loco_15 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Take_09012024_square\square_h_15\take_square_h15_lo.csv";
-file_path_xyz_optitrack_15 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Take_09012024_square\square_h_15\take_square_h15_op.csv";
+file_path_xyz_loco_075 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_075\take_square_h075_8a_090124_lo.csv";
+file_path_xyz_optitrack_075 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_075\take_square_h075_8a_090124_op.csv";
+file_path_xyz_loco_1 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_1\take_square_h1_8a_090124_lo.csv";
+file_path_xyz_optitrack_1 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_1\take_square_h1_8a_090124_op.csv";
+file_path_xyz_loco_15 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_15\take_square_h15_8a_090124_lo.csv";
+file_path_xyz_optitrack_15 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_15\take_square_h15_8a_090124_op.csv";
+
+% Position Data read in
+% file_path_xyz_loco_075 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_075\take_square_h075_8a_180424_lo.csv";
+% file_path_xyz_optitrack_075 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_075\take_square_h075_8a_180424_op.csv";
+% file_path_xyz_loco_1 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_1\take_square_h1_8a_180424_lo.csv";
+% file_path_xyz_optitrack_1 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_1\take_square_h1_8a_180424_op.csv";
+% file_path_xyz_loco_15 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_15\take_square_h15_8a_180424_lo.csv";
+% file_path_xyz_optitrack_15 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_15\take_square_h15_8a_180424_op.csv";
+
+% Position Data read in
+% file_path_xyz_loco_075 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_075\take_square_h075_8a_250424_lo.csv";
+% file_path_xyz_optitrack_075 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_075\take_square_h075_8a_250424_op.csv";
+% file_path_xyz_loco_1 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_1\take_square_h1_8a_250424_lo.csv";
+% file_path_xyz_optitrack_1 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_1\take_square_h1_8a_250424_op.csv";
+% file_path_xyz_loco_15 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_15\take_square_h15_8a_250424_lo.csv";
+% file_path_xyz_optitrack_15 = "C:\Users\danie\OneDrive - Alpen-Adria Universität Klagenfurt\Dokumente\AAU\Studienassistenz\Crazyflies\Data evaluation\Square_measurements\square_h_15\take_square_h15_8a_250424_op.csv";
 
 
 %Extract Data of 0.75m flight
@@ -88,9 +102,9 @@ z_l = [z_l_075, z_l_1,z_l_15];
 T = 1/100;
 t = T:T:T*length(x_o);
 
-%plotting(t,x_o,x_l,"X")
-%plotting(t,y_o,y_l,"Y")
-%plotting(t,z_o,z_l,"Z")
+plotting(t,x_o,x_l,"x [m]")
+plotting(t,y_o,y_l,"y [m]")
+plotting(t,z_o,z_l,"z [m]")
 
 %Error
 % measured value (loco) - real value (optitrack)
@@ -163,12 +177,55 @@ x_l = x_l + offset_x_optimized;
 y_l = y_l + offset_y_optimized;
 z_l = z_l + offset_z_optimized;
 
-%plotting(t,x_o,x_l,"X")
-%plotting(t,y_o,y_l,"Y")
-%plotting(t,z_o,z_l,"Z")
+plotting(t,x_o,x_l,"X")
+plotting(t,y_o,y_l,"Y")
+plotting(t,z_o,z_l,"Z")
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% extracting data for heat map
+% error calculation for each subareas over all heights with offset
+% used flying environment [3m x 2.5m x3m] --> divided into 6x5 [0.5m x 0.5 m]
+
+
+heatMapSet_x = cell(1,30);
+heatMapSet_y = cell(1,30);
+rms_x=zeros(6,5);
+rms_y=zeros(6,5);
+
+cB_x = [-1.5, -1, -0.5, 0, 0.5, 1, 1.5];
+cB_y = [-1.25, -0.75, -0.25, 0.25, 0.75, 1.25];
+ 
+%Generate and store 30 vectors for x
+k=1;
+for i = 1:6
+    for j = 1:5
+    matchingIndices = find(x_l >=cB_x(i)  & x_l < cB_x(i+1) & y_l >= cB_y(j) & y_l < cB_y(j+1));
+    extractedValues_x = x_l(matchingIndices) - x_o(matchingIndices);
+    extractedValues_y = y_l(matchingIndices) - y_o(matchingIndices);
+    heatMapSet_x{k} = extractedValues_x;
+    heatMapSet_y{k} = extractedValues_y;
+    rms_x(i,j) = sqrt(mean(extractedValues_x.^2));
+    rms_y(i,j) = sqrt(mean(extractedValues_y.^2));
+    k = k+1;
+    end
+end
+
+rms_x = rot90(rms_x, 1);
+rms_y = rot90(rms_y, 1);
+
+        
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % synchronize function, to synchronize the optitrack data with loco data
 function [optitrack_synchronized, min_error, min_offset] = synchronize(loco, optitrack)
 N = length(loco);
@@ -203,7 +260,6 @@ function plotting(t, optitrack, loco, y_label)
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %calculate statistical averages
-% next Steps --> Calculate STDV, Mean, RMS, Maximum Error
 function [Mean, rms, Max, stdv] = statisticalMeasures(x)
 Mean = mean(abs(x));
 rms = sqrt(mean(x.^2));  % Calculate RMS 
@@ -217,6 +273,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %calculate optimal offset with respect to optimize some statistical average
+%( RMS is used)
 
 function offset_optimized = optimize(error)
 RMS_min = 100;
